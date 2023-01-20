@@ -6,12 +6,12 @@ const Body = () => {
   return (
     <div class="bg-cover bg-center h-screen w-screen" style={{ backgroundImage: `url(${bg})`}}>
         <div class="container mx-auto p-8 flex flex-col items-center justify-center h-full">
-            <div class="container text-white text-center">
+            <div class="container text-white text-center mt-10">
                 <h1 class="text-5xl font-medium">Consent Management made easy</h1>
                 <p class="text-xl mt-6">Easily manage and track your consents</p>
             </div>
 
-            <div class="mt-40 container text-white text-center w-2/5">
+            <div class="mt-40 container text-white text-center w-2/5 rounded-2xl border-2 border-gray-800 p-10">
                 <p className="text-gray-800 text-xl leading-relaxed">
                   OpenData is a platform that allows users to take control of their personal data. With OpenData, users can easily give and manage their consent for data sharing with complete transparency and security.
                 </p>
