@@ -16,7 +16,7 @@ const Navbar = () => {
       Check Consent
     </a>
     <a href="#" class="px-3 py-1 rounded-md text-sm font-medium text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900">
-      View my Permission
+      Revoke Consent
     </a>
   </div>
   <div class="flex items-center justify-center md:justify-end">
