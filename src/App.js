@@ -11,7 +11,6 @@ function App() {
       <Navbar />
 
       <Body />
-
       <Footer2 />
     </div>
   );
