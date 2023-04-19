@@ -16,7 +16,7 @@ async function main() {
   const contractJson = readJsonSync(path.resolve(__dirname, '../artifacts/contracts/Consent.sol', 'Consent.json'));
 
   // Create a provider and wallet
-  const provider = new providers.JsonRpcProvider(process.env.REACT_APP_URL.toString());
+  const provider = new providers.JsonRpcProvider(process.env.REACT_APP_MUMBAI_URL.toString());
   const privateKey = process.env.REACT_APP_PRIVATE_KEY.toString();
   const wallet = new Wallet(privateKey, provider);
 
@@ -31,6 +31,7 @@ async function main() {
   const contract = await contractFactory.deploy();
 
   console.log(`Contract deployed at address: ${contract.address}`);
+  console.log(`Contract deployed at: ${hre.network.name}`);
 }
 
 main()

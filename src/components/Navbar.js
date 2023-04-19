@@ -4,6 +4,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import logo from '../assets/logo.svg'
 import Web3 from 'web3'
+import { Link } from 'react-router-dom';
 
 
 firebase.initializeApp({
@@ -12,7 +13,7 @@ firebase.initializeApp({
   projectId: 'opendata-ec09d',
 });
 
-function Navbar() {
+function Navbar( props ) {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
 
@@ -57,13 +58,13 @@ function Navbar() {
       <img src={logo} width='150px' height='250px'/>
     </a>
   <div class="flex justify-center md:justify-start">
-    <a href="#" class="px-3 py-1 rounded-md text-sm font-medium text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900 mr-3">
+    <a href="#" class="px-3 py-1 rounded-md text-sm font-medium text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900 mr-3" onClick={props.setView("giveconsent")}>
       Give Consent
     </a>
-    <a href="#" class="px-3 py-1 rounded-md text-sm font-medium text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900">
+    <a href="#" class="px-3 py-1 rounded-md text-sm font-medium text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900" onClick={props.setView("checkconsent")}>
       Check Consent
     </a>
-    <a href="#" class="px-3 py-1 rounded-md text-sm font-medium text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900">
+    <a href="#" class="px-3 py-1 rounded-md text-sm font-medium text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900" onClick={() => {props.setView("revokeconsent")}}>
       Revoke Consent
     </a>
   </div>
