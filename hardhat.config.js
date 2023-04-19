@@ -11,6 +11,10 @@ module.exports = {
     goerli: {
       url: process.env.REACT_APP_URL.toString(),
       accounts: [ process.env.REACT_APP_PRIVATE_KEY.toString() ]
+    },
+    matic: {
+      url: process.env.REACT_APP_MUMBAI_URL.toString(),
+      accounts: [ process.env.REACT_APP_PRIVATE_KEY.toString() ]
     }
   },
   solidity: {
