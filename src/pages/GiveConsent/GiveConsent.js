@@ -4,6 +4,7 @@ import { ethers } from 'ethers';
 
 import abi from '../../abi/Consent.json';
 import Navbar from '../../components/Navbar/Navbar';
+import Footer from '../../components/Footer/Footer';
 
 const { ContractFactory, Wallet, providers } = require('ethers');
 
@@ -47,8 +48,8 @@ const GiveConsent = () => {
     <div>
 
       <Navbar />
-      
-      <div className='border-2 mt-40'>
+
+      <div className='border-2 bodyCheckConsent'>
         <form onSubmit={handleFormSubmit}>
         <div>
             <label>User ID:</label>
@@ -80,6 +81,7 @@ const GiveConsent = () => {
           {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
         </form>
       </div>
+      <Footer />
     </div>
   );
 };

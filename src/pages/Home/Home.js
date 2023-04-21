@@ -2,6 +2,7 @@ import React from 'react'
 
 import bg from '../../assets/bg.png'
 import Navbar from '../../components/Navbar/Navbar'
+import Footer from '../../components/Footer/Footer'
 
 const Home = () => {
   return (
@@ -25,6 +26,7 @@ const Home = () => {
             </div>
         </div>
     </div>
+    <Footer />
     </div>
   )
 }
