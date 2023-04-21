@@ -1,3 +1,6 @@
-import { Home, GiveConsent, CheckConsent, RevokeConsent } from '../pages'
+import Home from './Home/Home';
+import GiveConsent from './GiveConsent/GiveConsent';
+import CheckConsent from './CheckConsent/CheckConsent';
+import RevokeConsent from './RevokeConsent/RevokeConsent';
 
-export
+export { Home, GiveConsent, CheckConsent, RevokeConsent };

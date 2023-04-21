@@ -2,26 +2,26 @@ import React, { useState } from 'react';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-import logo from './assets/logo.svg'
-import { Link, Router, Routes } from 'react-router-dom';
-import Body from './components/Body'
-import GiveConsent from './pages/GiveConsent';
-import CheckConsent from './pages/CheckConsent';
-import RevokeConsent from './pages/RevokeConsent';
+
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+import { Home, GiveConsent, CheckConsent, RevokeConsent } from './pages';
 
 function App() {
   const [view, setView] = useState("home");
   console.log(window.web3);
 
   return (
-    <Router>
-      <Routes>
-        <Router exact path="/" element={<Body />} />
-        <Router exact path="/giveconsent" element={<GiveConsent />} />
-        <Router exact path="/checkconsent" element={<CheckConsent />} />
-        <Router exact path="/revokeconsent" element={<RevokeConsent />} />
-      </Routes>
-    </Router>
+    <div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/giveconsent" element={<GiveConsent />} />
+          <Route path="/checkconsent" element={<CheckConsent />} />
+          <Route path="/revokeconsent" element={<RevokeConsent />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 
