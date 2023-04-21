@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { ethers } from 'ethers';
 // import { abi, } from './Consent.json';
+
+import abi from '../../abi/Consent.json';
+
+import Navbar from '../../components/Navbar/Navbar';
+
 const { ContractFactory, Wallet, providers } = require('ethers');
 
 
@@ -18,131 +23,6 @@ const RevokeConsent = () => {
     setLoading(true);
 
     try {
-      let abi = [
-        {
-          "inputs": [
-            {
-              "internalType": "string",
-              "name": "userId",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "recipientId",
-              "type": "string"
-            }
-          ],
-          "name": "checkConsent",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "bytes32",
-              "name": "",
-              "type": "bytes32"
-            }
-          ],
-          "name": "consentRecords",
-          "outputs": [
-            {
-              "internalType": "string",
-              "name": "userId",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "dataType",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "recipientId",
-              "type": "string"
-            },
-            {
-              "internalType": "uint256",
-              "name": "timestamp",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "string",
-              "name": "userId",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "recipientId",
-              "type": "string"
-            }
-          ],
-          "name": "getConsentKey",
-          "outputs": [
-            {
-              "internalType": "bytes32",
-              "name": "",
-              "type": "bytes32"
-            }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "string",
-              "name": "userId",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "dataType",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "recipientId",
-              "type": "string"
-            }
-          ],
-          "name": "giveConsent",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "string",
-              "name": "userId",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "recipientId",
-              "type": "string"
-            }
-          ],
-          "name": "revokeConsent",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        }
-      ]
 
       const privateKey = '0x3fb72fdfbed0a7a2ee3bd0b6118aa3f6274c59984ea845cb5d533841aaab582e';
       const provider = new providers.JsonRpcProvider('https://eth-goerli.g.alchemy.com/v2/0_RwFQIXZCNnjLsyuUP5Ly4AH9bFHVeC');
@@ -165,29 +45,33 @@ const RevokeConsent = () => {
   }
 
   return (
-    <div className='border-2 mt-40'>
-      <form onSubmit={handleFormSubmit}>
-        <div>
-          <label>User ID:</label>
-          <input
-            type="text"
-            value={userId}
-            onChange={(event) => setUserId(event.target.value)}
-          />
-        </div>
-        <div>
-          <label>Receipient ID:</label>
-          <input
-            type="text"
-            value={receipientId}
-            onChange={(event) => setReceipientId(event.target.value)}
-          />
-        </div>
-        <div>
-          <button type="submit" disabled={loading}>Revoke Consent</button>
-        </div>
-        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-      </form>
+    <div>
+      <Navbar />
+      
+      <div className='border-2 mt-40'>
+        <form onSubmit={handleFormSubmit}>
+          <div>
+            <label>User ID:</label>
+            <input
+              type="text"
+              value={userId}
+              onChange={(event) => setUserId(event.target.value)}
+            />
+          </div>
+          <div>
+            <label>Receipient ID:</label>
+            <input
+              type="text"
+              value={receipientId}
+              onChange={(event) => setReceipientId(event.target.value)}
+            />
+          </div>
+          <div>
+            <button type="submit" disabled={loading}>Revoke Consent</button>
+          </div>
+          {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+        </form>
+      </div>
     </div>
   );
 };
