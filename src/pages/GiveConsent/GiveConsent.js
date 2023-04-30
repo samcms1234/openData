@@ -6,6 +6,8 @@ import abi from '../../abi/Consent.json';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 
+import './GiveConsent.css'
+
 const { ContractFactory, Wallet, providers } = require('ethers');
 
 
