@@ -9,6 +9,8 @@ import Footer from '../../components/Footer/Footer';
 
 import './RevokeConsent.css';
 
+import { contractAddress } from "../../utils/contracts-config";
+
 const { ContractFactory, Wallet, providers } = require('ethers');
 
 
@@ -35,7 +37,7 @@ const RevokeConsent = () => {
       const signer = provider.getSigner();
 
       const consent = new ethers.Contract(
-        '0xd283a18f5Ef2f55Eb6464EEA0F9f06C8a6DFDCF6',
+        contractAddress,
         abi,
         signer
       );

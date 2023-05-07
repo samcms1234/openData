@@ -9,6 +9,8 @@ import './CheckConsent.css'
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 
+import { contractAddress } from "../../utils/contracts-config";
+
 const { ContractFactory, Wallet, providers } = require('ethers');
 
 const CheckConsent = () => {
@@ -37,11 +39,11 @@ const CheckConsent = () => {
       const signer = provider.getSigner();
 
       const consent = new ethers.Contract(
-        '0xd283a18f5Ef2f55Eb6464EEA0F9f06C8a6DFDCF6',
+        contractAddress,
         abi,
         signer
       );
-      
+
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });;
       window.alert(await consent.checkConsent(userId, receipientId));
       setValue(true);
