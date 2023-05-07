@@ -9,6 +9,8 @@ const hre = require("hardhat");
 const { ContractFactory, Wallet, providers } = require('ethers');
 const path = require('path');
 const { readJsonSync } = require('fs-extra');
+const fs = require("fs");
+const fse = require("fs-extra");
 require('dotenv').config();
 
 async function main() {
@@ -32,6 +34,19 @@ async function main() {
 
   console.log(`Contract deployed at address: ${contract.address}`);
   console.log(`Contract deployed at: ${hre.network.name}`);
+
+  if (fs.existsSync("./src")) {
+    fs.rmSync("./src/artifacts", { recursive: true, force: true });
+    fse.copySync("./artifacts/contracts", "./src/artifacts");
+    fs.writeFileSync(
+      "./src/utils/contracts-config.js",
+      `
+      export const contractAddress = "${contract.address}"
+      export const ownerAddress = "${contract.signer.address}"
+      export const networkDeployedTo = "${hre.network.config.chainId}"
+    `
+    );
+  }
 }
 
 main()
