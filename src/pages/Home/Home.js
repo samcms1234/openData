@@ -23,8 +23,8 @@ const Home = () => {
                   OpenData is a platform that allows users to take control of their personal data. With OpenData, users can easily give and manage their consent for data sharing with complete transparency and security.
                 </p>
               <div className="mt-8">
-               <button className='bg-red-500 text-white p-3 rounded-md hover:bg-red-600'>
-                <Link to="/signup">
+               <button>
+                <Link to="/signup" className='bg-red-500 text-white p-3 rounded-md hover:bg-red-600'>
                   Get started
                 </Link>
                </button>
