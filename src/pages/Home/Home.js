@@ -3,6 +3,8 @@ import React from 'react'
 import bg from '../../assets/bg.png'
 import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
+import { Link } from 'react-router-dom'
+import SignUp from '../../components/SignUp/SignUp'
 
 const Home = () => {
   return (
@@ -21,7 +23,11 @@ const Home = () => {
                   OpenData is a platform that allows users to take control of their personal data. With OpenData, users can easily give and manage their consent for data sharing with complete transparency and security.
                 </p>
               <div className="mt-8">
-               <button className="bg-red-500 text-white p-3 rounded-md hover:bg-red-600">Get started</button>
+               <button className='bg-red-500 text-white p-3 rounded-md hover:bg-red-600'>
+                <Link to="/signup">
+                  Get started
+                </Link>
+               </button>
               </div>
             </div>
         </div>
