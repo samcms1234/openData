@@ -7,6 +7,7 @@ import { Home, GiveConsent, CheckConsent, RevokeConsent } from './pages';
 import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
 import Protected from './Routes/Protected';
+import { LoginProvider } from './contexts/LoginContext'
 
 function App() {
   const [view, setView] = useState("home");
@@ -16,16 +17,18 @@ function App() {
 
   return (
     <div>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/giveconsent" element={<Protected Component={GiveConsent} />} />
-          <Route path="/checkconsent" element={<Protected Component={CheckConsent} />} />
-          <Route path="/revokeconsent" element={<Protected Component={RevokeConsent} />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-        </Routes>
-      </Router>
+      <LoginProvider>
+        <Router>
+          <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/giveconsent" element={<Protected Component={GiveConsent} />} />
+              <Route path="/checkconsent" element={<Protected Component={CheckConsent} />} />
+              <Route path="/revokeconsent" element={<Protected Component={RevokeConsent} />} />
+              <Route path="/signin" element={<SignIn />} />
+              <Route path="/signup" element={<SignUp />} />
+          </Routes>
+        </Router>
+      </LoginProvider>
     </div>
   );
 }
