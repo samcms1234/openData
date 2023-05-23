@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import logo from '../../assets/logo.svg';
 import Web3 from 'web3'
 import { Link } from 'react-router-dom';
+import WalletConnectContext from '../../contexts/WalletConnectContext';
+import LoginContext from '../../contexts/LoginContext';
+
 
 import './Navbar.css';
 
@@ -15,19 +18,19 @@ firebase.initializeApp({
 });
 
 const Navbar = () => {
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-  const [isConnected, setIsConnected] = useState(false);
+  const { isConnected, setIsConnected } = useContext(WalletConnectContext);
+  const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
 
   const handleGoogleLogin = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider).then((result) => {
-      setIsUserLoggedIn(true);
+      setIsLoggedIn(true);
     });
   }
 
   const handleLogout = () => {
     firebase.auth().signOut().then(() => {
-    setIsUserLoggedIn(false);
+      setIsLoggedIn(false);
     });
     }
 
@@ -75,8 +78,8 @@ const Navbar = () => {
           :
           <a href="#" className="navbar-action mr-3" onClick={handleConnect}>Connect</a>
         }
-        {isUserLoggedIn ?
-          <a href="#" className="navbar-action" onClick={() => firebase.auth().signOut().then(() => setIsUserLoggedIn(false))}>Logout</a>
+        {isLoggedIn ?
+          <a href="#" className="navbar-action" onClick={() => firebase.auth().signOut().then(() => setIsLoggedIn(false))}>Logout</a>
           :
           <a href="#" className="navbar-action" onClick={handleGoogleLogin}>Login</a>
         }
