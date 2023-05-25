@@ -9,12 +9,13 @@ module.exports = {
       chainId: 1337
     },
     goerli: {
-      url: process.env.REACT_APP_URL.toString(),
-      accounts: [ process.env.REACT_APP_PRIVATE_KEY.toString() ]
+      url: `${process.env.REACT_APP_URL}`,
+      accounts: [ `${process.env.REACT_APP_PRIVATE_KEY}` ]
     },
     matic: {
-      url: process.env.REACT_APP_MUMBAI_URL.toString(),
-      accounts: [ process.env.REACT_APP_PRIVATE_KEY.toString() ]
+      url: `${process.env.REACT_APP_MUMBAI_URL}`,
+      accounts: [ `${process.env.REACT_APP_PRIVATE_KEY}` ],
+      chainId: 80001,
     }
   },
   solidity: {

@@ -56,7 +56,7 @@ The OpenData platform can be integrated with a frontend application using web3.j
 
 Contract address:
  ```shell
- 0x3CB55C12be9F73Eee4Ba65556Bd11B3292C1b1EA
+ 0xAf98944DC52Ef764C404104ec98e180Cf54Fe935
  ```
 ### Built With
 
