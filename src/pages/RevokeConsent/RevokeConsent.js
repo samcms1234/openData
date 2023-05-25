@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { ethers } from 'ethers';
 // import { abi, } from './Consent.json';
 
@@ -6,6 +6,8 @@ import abi from '../../abi/Consent.json';
 
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
+
+import LoginContext from '../../contexts/LoginContext';
 
 import './RevokeConsent.css';
 
@@ -20,6 +22,8 @@ const RevokeConsent = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [userId, setUserId] = useState('');
+
+  const { credentials, setCredentials } = useContext(LoginContext);
 
 
 
@@ -42,7 +46,7 @@ const RevokeConsent = () => {
         signer
       );
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });;
-      await consent.revokeConsent(userId, receipientId);
+      await consent.revokeConsent(credentials.name, receipientId);
       await window.alert("Consent Revoked");
       setErrorMessage('');
     } catch (err) {
@@ -61,9 +65,9 @@ const RevokeConsent = () => {
           <div>
             <label>User ID:</label>
             <input
-              type="text"
-              value={userId}
-              onChange={(event) => setUserId(event.target.value)}
+              type="text-prefetched"
+              placeholder={credentials.name}
+              disabled
             />
           </div>
           <div>

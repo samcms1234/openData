@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { ethers } from 'ethers';
 // import { abi, } from './Consent.json';
 
 import abi from '../../abi/Consent.json';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
+
+import LoginContext from '../../contexts/LoginContext';
 
 import './GiveConsent.css'
 
@@ -20,6 +22,8 @@ const GiveConsent = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [userId, setUserId] = useState('');
+
+  const { credentials, setCredentials } = useContext(LoginContext);
 
 
   const handleFormSubmit = async (event) => {
@@ -41,7 +45,7 @@ const GiveConsent = () => {
         signer
       );
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });;
-      await consent.giveConsent(userId, dataType, receipientId);
+      await consent.giveConsent(credentials.name, dataType, receipientId);
       await window.alert("Consent Recorded")
       setErrorMessage('');
     } catch (err) {
@@ -61,9 +65,9 @@ const GiveConsent = () => {
         <div>
             <label>User ID:</label>
             <input
-              type="text"
-              value={userId}
-              onChange={(event) => setUserId(event.target.value)}
+              type="text-prefetched"
+              placeholder={credentials.name}
+              disabled
             />
           </div>
           <div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { ethers } from 'ethers';
 // import { abi, } from './Consent.json';
 
@@ -8,6 +8,7 @@ import './CheckConsent.css'
 
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
+import LoginContext from '../../contexts/LoginContext';
 
 import { contractAddress } from "../../utils/contracts-config";
 
@@ -20,6 +21,9 @@ const CheckConsent = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [userId, setUserId] = useState('');
+
+  const { credentials, setCredentials } = useContext(LoginContext);
+
 
 
 
@@ -45,7 +49,7 @@ const CheckConsent = () => {
       );
 
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });;
-      window.alert(await consent.checkConsent(userId, receipientId));
+      window.alert(await consent.checkConsent(credentials.name, receipientId));
       setValue(true);
       setErrorMessage('');
     } catch (err) {
@@ -64,9 +68,9 @@ const CheckConsent = () => {
             <div>
                 <label>User ID:</label>
                 <input
-                  type="text"
-                  value={userId}
-                  onChange={(event) => setUserId(event.target.value)}
+                  type="text-prefetched"
+                  placeholder={credentials.name}
+                  disabled
                 />
             </div>
             <div>
