@@ -4,14 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { WalletConnectProvider } from './contexts/WalletConnectContext';
+import { ErrorDetailsProvider } from './contexts/ErrorContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <WalletConnectProvider>
-      <App />
-    </WalletConnectProvider>
+    <ErrorDetailsProvider>
+      <WalletConnectProvider>
+        <App />
+      </WalletConnectProvider>
+    </ErrorDetailsProvider>
   </React.StrictMode>
 );
 

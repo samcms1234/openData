@@ -10,7 +10,7 @@ export const WalletConnectProvider = ({ children }) => {
 
   return (
     <WalletConnectContext.Provider value={{
-        isConnected, setIsConnected
+        isConnected, publicKey, setIsConnected, setPublicKey
     }}>
         { children }
     </WalletConnectContext.Provider>
