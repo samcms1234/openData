@@ -1,0 +1,19 @@
+{
+    "Microsoft": {
+        "uniqueId" : "c7bac46904be785cd0c965bf5659610044f0cdb4cbb02d2ec398dc56648988fd",
+        "publicKey" : "0x4e2B7DCA2f7aeB70DC2D56a35650962a3c8f1234"
+    },
+    "Google": {
+        "uniqueId" : "ce770667e5f9b0d8f55367bb79419689d90c48451bb33f079f3a9a72ae132de8",
+        "publicKey" : "0xaad93a9976b28fB2d4F2346C6e5cc5F6D14da074"
+    },
+    "Bing": {
+        "uniqueId" : "7bd52326e67606977db454affcf9897cfdbff8bef955a2b88bbef19727931346",
+        "publicKey" : "0xd7606B1bE0D6494fb891177DF34647ceA4132ec9"
+    },
+    "Twitter": {
+        "uniqueId" : "bcd18ead5fa830127187d499e97e7a4dc8f641ec34d8c7e9f9f24deae2e39fdc",
+        "publicKey" : "0x73011Fbc7cdaf41AE492Cd079b4e008c3ba1c4c5"
+    }
+
+}
