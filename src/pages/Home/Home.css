@@ -1,6 +1,10 @@
-.Home-page-background {
+/* .Home-page-background {
     background-size: cover;
     background-position: center;
     height: screen;
     width: screen;
+} */
+
+.heading {
+    font-family: 'Source Sans Pro', sans-serif;
 }
