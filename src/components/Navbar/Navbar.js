@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
@@ -7,6 +7,7 @@ import Web3 from 'web3'
 import { Link } from 'react-router-dom';
 import WalletConnectContext from '../../contexts/WalletConnectContext';
 import LoginContext from '../../contexts/LoginContext';
+import ErrorContext from '../../contexts/ErrorContext';
 
 
 import './Navbar.css';
@@ -19,37 +20,79 @@ firebase.initializeApp({
 
 const Navbar = () => {
   const { isConnected, setIsConnected } = useContext(WalletConnectContext);
+  const { publicKey, setPublicKey } = useContext(WalletConnectContext);
   const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
+  const { credentials, setCredentials } = useContext(LoginContext);
+  const { errorOccurred, setErrorOccurred } = useContext(ErrorContext);
+  const { error, setError } = useContext(ErrorContext);
 
-  const handleGoogleLogin = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider).then((result) => {
-      setIsLoggedIn(true);
-    });
+  const fetchPublicKey = async () => {
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    setPublicKey(accounts[0]);
+    console.log(publicKey);
   }
 
-  const handleLogout = () => {
-    firebase.auth().signOut().then(() => {
-      setIsLoggedIn(false);
-    });
+  useEffect(() => {
+    fetchPublicKey();
+  })
+
+  const handleGoogleLogin = async () => {
+
+    try {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      await firebase.auth().signInWithPopup(provider).then((result) => {
+
+        const user = result.user;
+
+        console.log(result);
+
+        setCredentials({
+          name: user.displayName,
+          email: user.email
+        });
+        
+        setIsLoggedIn(true);
+      });
+    } catch(err) {
+      setErrorOccurred(true);
+      setError('Failed to login');
     }
+  }
+
+  const handleLogout = async () => {
+    try {
+      await firebase.auth().signOut().then(() => {
+        setIsLoggedIn(false);
+        setCredentials(null);
+      });
+    } catch(err) {
+      setErrorOccurred(true);
+      setError('Failed to logout');
+    }
+  }
 
     const handleConnect = async () => {
-      if (window.ethereum) {
-      const web3 = new Web3(window.ethereum);
       try {
-      await window.ethereum.enable();
-      setIsConnected(true);
-      } catch (error) {
-      console.log(error);
+        if (window.ethereum) {
+        const web3 = new Web3(window.ethereum);
+        try {
+        await window.ethereum.enable();
+        setIsConnected(true);
+        } catch (error) {
+        console.log(error);
+        }
+        } else if (window.web3) {
+        const web3 = new Web3(window.web3.currentProvider);
+        setIsConnected(true);
+        } else {
+        setErrorOccurred(true);
+        setError('Non-Ethereum browser detected. You should consider trying MetaMask!');
+        }
+      } catch(err) {
+        setErrorOccurred(true);
+        setError('Failed to connect to metamask');
       }
-      } else if (window.web3) {
-      const web3 = new Web3(window.web3.currentProvider);
-      setIsConnected(true);
-      } else {
-      console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
-      }
-      }
+    }
       
       const handleDisconnect = () => {
         setIsConnected(false);
@@ -73,16 +116,21 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbar-actions">
-        {isConnected ? 
+        {isLoggedIn 
+        ?
+          isConnected ? 
           <a href="#" className="navbar-action mr-3" onClick={handleDisconnect}>Disconnect</a> 
           :
           <a href="#" className="navbar-action mr-3" onClick={handleConnect}>Connect</a>
+        :
+        <button className="navbar-action-disabled-state mr-3" disabled><a onClick={handleConnect}>Connect</a></button>
         }
         {isLoggedIn ?
           <a href="#" className="navbar-action" onClick={() => firebase.auth().signOut().then(() => setIsLoggedIn(false))}>Logout</a>
           :
           <a href="#" className="navbar-action" onClick={handleGoogleLogin}>Login</a>
         }
+
       </div>
     </div>
   )
