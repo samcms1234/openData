@@ -9,6 +9,8 @@ import WalletConnectContext from '../../contexts/WalletConnectContext';
 import LoginContext from '../../contexts/LoginContext';
 import ErrorContext from '../../contexts/ErrorContext';
 
+import { TailSpin } from 'react-loader-spinner';
+
 
 import './Navbar.css';
 
@@ -22,6 +24,7 @@ const Navbar = () => {
   const { isConnected, setIsConnected } = useContext(WalletConnectContext);
   const { publicKey, setPublicKey } = useContext(WalletConnectContext);
   const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
+  const [loading, setLoading] = useState(false);
   const { credentials, setCredentials } = useContext(LoginContext);
   const { errorOccurred, setErrorOccurred } = useContext(ErrorContext);
   const { error, setError } = useContext(ErrorContext);
@@ -38,6 +41,7 @@ const Navbar = () => {
 
   const handleGoogleLogin = async () => {
 
+    setLoading(true);
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
       await firebase.auth().signInWithPopup(provider).then((result) => {
@@ -57,9 +61,11 @@ const Navbar = () => {
       setErrorOccurred(true);
       setError('Failed to login');
     }
+    setLoading(false);
   }
 
   const handleLogout = async () => {
+    setLoading(true);
     try {
       await firebase.auth().signOut().then(() => {
         setIsLoggedIn(false);
@@ -69,6 +75,7 @@ const Navbar = () => {
       setErrorOccurred(true);
       setError('Failed to logout');
     }
+    setLoading(false);
   }
 
     const handleConnect = async () => {
@@ -125,7 +132,10 @@ const Navbar = () => {
         :
         <button className="navbar-action-disabled-state mr-3" disabled><a onClick={handleConnect}>Connect</a></button>
         }
-        {isLoggedIn ?
+        {loading ? 
+        <a href="#" className="navbar-action"><TailSpin color='#fff' height={24} /></a>
+        :
+        isLoggedIn ?
           <a href="#" className="navbar-action" onClick={() => firebase.auth().signOut().then(() => setIsLoggedIn(false))}>Logout</a>
           :
           <a href="#" className="navbar-action" onClick={handleGoogleLogin}>Login</a>
