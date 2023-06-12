@@ -11,6 +11,7 @@ import Footer from '../../components/Footer/Footer';
 import LoginContext from '../../contexts/LoginContext';
 
 import { TailSpin } from 'react-loader-spinner';
+import { toast } from 'react-toastify';
 
 import { contractAddress } from "../../utils/contracts-config";
 
@@ -50,8 +51,13 @@ const CheckConsent = () => {
         signer
       );
 
-      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });;
-      window.alert(await consent.checkConsent(credentials.name, receipientId));
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+      if(await consent.checkConsent(credentials.name, receipientId))
+      toast.success('consent record exists');
+      else
+      toast.warn('consent record does not exist');
+
       setValue(true);
       setErrorMessage('');
     } catch (err) {

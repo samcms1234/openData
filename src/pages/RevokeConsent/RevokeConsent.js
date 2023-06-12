@@ -10,6 +10,8 @@ import Footer from '../../components/Footer/Footer';
 import LoginContext from '../../contexts/LoginContext';
 
 import { TailSpin } from 'react-loader-spinner';
+import { toast } from 'react-toastify';
+
 
 import './RevokeConsent.css';
 
@@ -48,8 +50,13 @@ const RevokeConsent = () => {
         signer
       );
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });;
-      await consent.revokeConsent(credentials.name, receipientId);
-      await window.alert("Consent Revoked");
+      const response = await consent.revokeConsent(credentials.name, receipientId);
+
+      if(response.hash != "")
+      toast.success("Consent Revoked");
+      else
+      toast.warn("Failed to Revoke Consent");
+      
       setErrorMessage('');
     } catch (err) {
       setErrorMessage(err.message);

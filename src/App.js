@@ -8,6 +8,10 @@ import SignIn from './components/SignIn/SignIn';
 import Protected from './Routes/Protected';
 import { LoginProvider } from './contexts/LoginContext'
 
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   const [view, setView] = useState("home");
   const [loggedIn, setLoggedIn] = useState(false);
@@ -18,6 +22,7 @@ function App() {
     <div>
       <LoginProvider>
         <Router>
+          <ToastContainer />
           <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/giveconsent" element={<Protected Component={GiveConsent} />} />

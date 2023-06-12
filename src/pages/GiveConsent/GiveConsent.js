@@ -9,6 +9,8 @@ import Footer from '../../components/Footer/Footer';
 import LoginContext from '../../contexts/LoginContext';
 
 import { TailSpin } from 'react-loader-spinner';
+import { toast } from 'react-toastify';
+
 
 
 import './GiveConsent.css'
@@ -48,8 +50,13 @@ const GiveConsent = () => {
         signer
       );
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });;
-      await consent.giveConsent(credentials.name, dataType, receipientId);
-      await window.alert("Consent Recorded")
+      const response = await consent.giveConsent(credentials.name, dataType, receipientId);
+
+      if(response.hash != "")
+      toast.success("Consent Recorded");
+      else
+      toast.warn("Failed to Give Consent")
+
       setErrorMessage('');
     } catch (err) {
       setErrorMessage(err.message);
