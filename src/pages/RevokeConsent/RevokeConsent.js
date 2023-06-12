@@ -9,6 +9,8 @@ import Footer from '../../components/Footer/Footer';
 
 import LoginContext from '../../contexts/LoginContext';
 
+import { TailSpin } from 'react-loader-spinner';
+
 import './RevokeConsent.css';
 
 import { contractAddress } from "../../utils/contracts-config";
@@ -79,7 +81,12 @@ const RevokeConsent = () => {
             />
           </div>
           <div>
-            <button type="submit" disabled={loading}>Revoke Consent</button>
+            {
+              loading ? 
+              <button type="submit" disabled={loading}><TailSpin color='#fff' height={24} /></button>
+              :
+              <button type="submit" disabled={loading}>Revoke Consent</button>
+            }
           </div>
           {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
         </form>

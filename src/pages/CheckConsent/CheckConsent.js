@@ -10,6 +10,8 @@ import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import LoginContext from '../../contexts/LoginContext';
 
+import { TailSpin } from 'react-loader-spinner';
+
 import { contractAddress } from "../../utils/contracts-config";
 
 const { ContractFactory, Wallet, providers } = require('ethers');
@@ -83,7 +85,12 @@ const CheckConsent = () => {
             </div>
 
             <div>
+              {
+                loading ? 
+                <button type="submit" disabled={loading}><TailSpin color='#fff' height={24} /></button>
+                :
                 <button type="submit" disabled={loading}>Check Consent</button>
+              }
                 {value && <p>{value}</p>}
             </div>
           </form>

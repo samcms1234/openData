@@ -8,6 +8,9 @@ import Footer from '../../components/Footer/Footer';
 
 import LoginContext from '../../contexts/LoginContext';
 
+import { TailSpin } from 'react-loader-spinner';
+
+
 import './GiveConsent.css'
 
 import { contractAddress } from "../../utils/contracts-config";
@@ -15,12 +18,12 @@ import { contractAddress } from "../../utils/contracts-config";
 const { ContractFactory, Wallet, providers } = require('ethers');
 
 
-
 const GiveConsent = () => {
   const [receipientId, setReceipientId] = useState('');
   const [dataType, setDataType] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const [userId, setUserId] = useState('');
 
   const { credentials, setCredentials } = useContext(LoginContext);
@@ -87,7 +90,12 @@ const GiveConsent = () => {
             />
           </div>
           <div>
-            <button type="submit" disabled={loading}>Give Consent</button>
+            {
+              loading ?
+              <button type="submit" disabled={loading}><TailSpin color='#fff' height={24} /></button>
+              :
+              <button type="submit" disabled={loading}>Give Consent</button>
+            }
           </div>
           {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
         </form>
