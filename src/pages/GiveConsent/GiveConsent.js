@@ -74,20 +74,32 @@ const GiveConsent = () => {
             />
           </div>
           <div>
-            <label>Receipient ID:</label>
-            <input
-              type="text"
-              value={receipientId}
-              onChange={(event) => setReceipientId(event.target.value)}
-            />
+          <label>Recipient ID:</label>
+          <select
+            className="recipient-select"
+            value={receipientId}
+            onChange={(event) => setReceipientId(event.target.value)}
+          >
+            <option value="Microsoft">Microsoft</option>
+            <option value="Google">Google</option>
+            <option value="Oracle">Oracle</option>
+            <option value="Bing">Bing</option>
+            <option value="Tesla">Tesla</option>
+          </select>
           </div>
           <div>
-            <label>Data Type:</label>
-            <input
-              type="text"
-              value={dataType}
-              onChange={(event) => setDataType(event.target.value)}
-            />
+          <label>Data Type:</label>
+          <select
+            className="recipient-select"
+            value={dataType}
+            onChange={(event) => setDataType(event.target.value)}
+          >
+            <option value="Location">Location</option>
+            <option value="Search History">Search History</option>
+            <option value="IP Address">IP Address</option>
+            <option value="Device storage">Device storage</option>
+            <option value="Online Transactions">Online Transactions</option>
+          </select>
           </div>
           <div>
             {

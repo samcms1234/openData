@@ -73,12 +73,18 @@ const RevokeConsent = () => {
             />
           </div>
           <div>
-            <label>Receipient ID:</label>
-            <input
-              type="text"
-              value={receipientId}
-              onChange={(event) => setReceipientId(event.target.value)}
-            />
+          <label>Recipient ID:</label>
+          <select
+            className="recipient-select"
+            value={receipientId}
+            onChange={(event) => setReceipientId(event.target.value)}
+          >
+            <option value="Microsoft">Microsoft</option>
+            <option value="Google">Google</option>
+            <option value="Oracle">Oracle</option>
+            <option value="Bing">Bing</option>
+            <option value="Tesla">Tesla</option>
+          </select>
           </div>
           <div>
             {
