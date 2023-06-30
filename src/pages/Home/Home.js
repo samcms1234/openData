@@ -12,7 +12,7 @@ const Home = () => {
         <Navbar />
 
         <div class="bg-cover bg-center h-screen w-screen" style={{ backgroundImage: `url(${bg})`}}>
-        <div class="container mx-auto p-8 flex flex-col items-center justify-center h-full">
+        <div class="container mx-auto p-8 flex flex-col items-center justify-center h-full mt-20">
             <div class="container text-white text-center mt-10">
                 <h1 class="heading text-5xl font-medium">Consent Management made easy</h1>
                 <p class="heading text-xl mt-6">Easily manage and track your consents</p>
